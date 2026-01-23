@@ -1,0 +1,21 @@
+name: rocket
+services:
+  app:
+    build:
+      context: ./app
+      dockerfile: Dockerfile
+    ports:
+    - target: 8080
+      published: 8080
+      mode: ingress
+    healthcheck:
+      test:
+      - CMD
+      - curl
+      - -f
+      - http://localhost:8080
+    deploy:
+      resources:
+        reservations:
+          cpus: '0.5'
+          memory: 512M
